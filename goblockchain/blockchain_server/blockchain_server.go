@@ -96,7 +96,7 @@ func (bcs *BlockchainServer) Transactions(w http.ResponseWriter, req *http.Reque
 	case http.MethodPut:
 		decoder := json.NewDecoder(req.Body)
 		var t block.TransactionRequest
-		err := decoder.Decode(&t)
+		err := decoder.Decode(&t) // store decoded result to t, if any error occured, save to err
 		if err != nil {
 			log.Printf("ERROR: %v", err)
 			io.WriteString(w, string(utils.JsonStatus("fail")))
